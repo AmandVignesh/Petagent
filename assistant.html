@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOLI Assistant</title>
+    <link rel="stylesheet" href="css/assistant.css">
+</head>
+<body>
+
+    <div id="assistant-root">
+
+        <!-- Collapsed Pill -->
+        <div id="assistant-pill">
+            <div class="pill-glow"></div>
+            <div class="pill-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                    <circle cx="9" cy="9" r="0.5" fill="currentColor"/>
+                    <circle cx="15" cy="9" r="0.5" fill="currentColor"/>
+                    <path d="M5 12a7 7 0 0 0 14 0"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                    <line x1="8" y1="22" x2="16" y2="22"/>
+                </svg>
+            </div>
+            <div class="pill-mic hidden" id="mic-indicator">
+                <div class="mic-ring"></div>
+                <div class="mic-ring delay-1"></div>
+            </div>
+        </div>
+
+        <!-- Expanded Panel -->
+        <div id="assistant-panel" class="hidden">
+
+            <!-- Input Area -->
+            <div class="panel-input-area" id="input-area">
+                <div class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/>
+                        <path d="M5 12a7 7 0 0 0 14 0"/>
+                        <line x1="12" y1="19" x2="12" y2="22"/>
+                    </svg>
+                </div>
+                <input type="text" id="command-input" class="command-input" placeholder="Tell me what you want to do..." autocomplete="off" spellcheck="false">
+                <div class="input-shortcut">
+                    <kbd>Ctrl</kbd><kbd>K</kbd>
+                </div>
+            </div>
+
+            <!-- Response Area (hidden until a command is entered) -->
+            <div id="response-area" class="response-area hidden">
+                <div class="response-query" id="response-query"></div>
+                <div class="response-body" id="response-body">
+                    <div class="response-indicator">
+                        <span class="dot d1"></span>
+                        <span class="dot d2"></span>
+                        <span class="dot d3"></span>
+                    </div>
+                    <div class="response-text" id="response-text"></div>
+                </div>
+            </div>
+
+            <!-- Suggestion Chips -->
+            <div class="suggestion-chips" id="suggestion-chips">
+                <button class="chip" data-action="summarize" style="--delay: 0">
+                    <span class="chip-icon">📝</span>
+                    <span class="chip-text">Summarize this</span>
+                </button>
+                <button class="chip" data-action="optimize" style="--delay: 1">
+                    <span class="chip-icon">⚡</span>
+                    <span class="chip-text">Optimize code</span>
+                </button>
+                <button class="chip" data-action="search" style="--delay: 2">
+                    <span class="chip-icon">🔍</span>
+                    <span class="chip-text">Search web</span>
+                </button>
+                <button class="chip" data-action="write" style="--delay: 3">
+                    <span class="chip-icon">✍️</span>
+                    <span class="chip-text">Write report</span>
+                </button>
+                <button class="chip" data-action="improve" style="--delay: 4">
+                    <span class="chip-icon">✨</span>
+                    <span class="chip-text">Improve writing</span>
+                </button>
+                <button class="chip" data-action="explain" style="--delay: 5">
+                    <span class="chip-icon">💡</span>
+                    <span class="chip-text">Explain selection</span>
+                </button>
+            </div>
+
+            <!-- Context Hint -->
+            <div class="context-hint" id="context-hint">
+                <span class="context-dot"></span>
+                <span class="context-text">Ready to assist</span>
+            </div>
+        </div>
+
+        <!-- Feedback Toast -->
+        <div id="feedback-toast" class="hidden">
+            <div class="toast-icon">✓</div>
+            <div class="toast-text" id="toast-text">Done.</div>
+        </div>
+
+    </div>
+
+    <script src="js/assistant.js"></script>
+</body>
+</html>

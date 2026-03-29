@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOLI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Invisible hover zone — always full width so cursor can find the widget -->
+    <div id="hover-zone">
+
+        <div id="notch" class="notch-expanded drag-region">
+            
+            <!-- Canvas Pixel Eyes -->
+            <div id="eyes" class="eyes-container focused">
+                <canvas id="eye-left" class="pixel-eye" width="9" height="10"></canvas>
+                <canvas id="eye-right" class="pixel-eye" width="9" height="10"></canvas>
+            </div>
+
+            <div id="eyes-distracted" class="eyes-container angry hidden">
+                <canvas id="eye-left-angry" class="pixel-eye" width="9" height="10"></canvas>
+                <canvas id="eye-right-angry" class="pixel-eye" width="9" height="10"></canvas>
+            </div>
+
+            <!-- Setup Screen: Start + Timer Settings -->
+            <div id="setup-controls" class="setup-controls no-drag">
+                <div class="setup-row">
+                    <button id="timer-settings-btn" class="settings-btn" title="Timer Settings">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        <span id="selected-time-label" class="selected-time">25 min</span>
+                    </button>
+                    <button id="start-btn" class="start-btn">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="none">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        START
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timer Settings Dropdown -->
+            <div id="timer-dropdown" class="timer-dropdown hidden no-drag">
+                <div class="dropdown-header">
+                    <span class="dropdown-title">SET FOCUS TIME</span>
+                </div>
+                <div class="time-buttons">
+                    <button class="time-btn" data-time="15">15m</button>
+                    <button class="time-btn" data-time="25">25m</button>
+                    <button class="time-btn" data-time="45">45m</button>
+                    <button class="time-btn" data-time="60">60m</button>
+                    <button class="time-btn" data-time="90">90m</button>
+                </div>
+                <div class="custom-time-row">
+                    <input type="number" id="custom-time" class="time-input" placeholder="Custom mins" min="1" max="999">
+                    <button id="custom-apply-btn" class="custom-apply">SET</button>
+                </div>
+            </div>
+
+            <!-- Compact Timer Row (shown in collapsed compact mode) -->
+            <div id="timer-row" class="timer-row hidden">
+                <div id="timer-text" class="timer-display">25:00</div>
+            </div>
+
+            <!-- Full Timer Details (shown when expanded in running mode) -->
+            <div id="timer-details" class="timer-details hidden no-drag">
+                <div id="timer-text-full" class="timer-display" style="font-size:28px;">25:00</div>
+                
+                <div id="camera-status" class="camera-status">
+                    <span class="status-dot"></span> MONITORING
+                    <span id="media-badge" class="hidden" style="margin-left:5px;color:#1db954;">&#127925;</span>
+                </div>
+                
+                <div id="active-controls" class="active-controls">
+                    <button id="stop-btn" class="control-btn">STOP</button>
+                    <button id="reset-btn" class="control-btn">RESET</button>
+                </div>
+            </div>
+            
+            <div id="warning-text" class="warning-display hidden no-drag">DISTRACTED</div>
+
+            <!-- Dynamic Island Media Player -->
+            <div id="media-player" class="media-container hidden no-drag">
+                <div class="media-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="5.5" cy="17.5" r="2.5"></circle>
+                        <circle cx="17.5" cy="15.5" r="2.5"></circle>
+                        <path d="M8 17V5l12-2v12"></path>
+                    </svg>
+                </div>
+                <div class="media-info">
+                    <div class="media-title-container">
+                        <div id="media-title" class="media-title">No Media Playing</div>
+                    </div>
+                    <div id="media-artist" class="media-artist">Unknown Artist</div>
+                </div>
+                <div class="media-visualizer" id="media-visualizer">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <video id="webcam" autoplay playsinline class="hidden"></video>
+    
+    <script src="node_modules/@mediapipe/tasks-vision/vision_bundle.js"></script>
+    <script src="node_modules/@tensorflow/tfjs-core/dist/tf-core.min.js"></script>
+    <script src="node_modules/@tensorflow/tfjs-backend-webgl/dist/tf-backend-webgl.min.js"></script>
+    <script src="node_modules/@tensorflow-models/face-detection/dist/face-detection.min.js"></script>
+    <script src="node_modules/face-api.js/dist/face-api.min.js"></script>
+
+    <script src="js/timer.js"></script>
+    <script src="js/camera.js"></script>
+    <script src="js/renderer.js"></script>
+</body>
+</html>
